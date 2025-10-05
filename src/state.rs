@@ -1,7 +1,8 @@
-use std::ops::Index;
+use std::ops::{Index, IndexMut};
 
 use crate::{Resource, ResourceMap};
 
+#[derive(Debug, Clone)]
 pub struct StateVec {
     pub resources: Vec<f64>,
 }
@@ -23,5 +24,11 @@ impl Index<Resource> for StateVec {
 
     fn index(&self, index: Resource) -> &Self::Output {
         &self.resources[index.0]
+    }
+}
+
+impl IndexMut<Resource> for StateVec {
+    fn index_mut(&mut self, index: Resource) -> &mut Self::Output {
+        &mut self.resources[index.0]
     }
 }

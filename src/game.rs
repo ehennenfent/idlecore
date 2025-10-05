@@ -42,4 +42,36 @@ impl Game {
         self.recipes.insert(name.to_string(), recipe);
         Ok(())
     }
+
+    pub fn tick(&mut self, recipe_name: &str) -> Result<(), String> {
+        let recipe = self
+            .recipes
+            .get(recipe_name)
+            .ok_or(format!("Recipe {} not found", recipe_name))?;
+        let has_all_requires = recipe
+            .requires
+            .iter()
+            .all(|(resource, amount)| self.inventory[*resource] >= *amount);
+        if !has_all_requires {
+            return Err(format!("Recipe {} is missing prerequisites", recipe_name));
+        }
+        let has_all_ingredients = recipe
+            .ingredients
+            .iter()
+            .all(|(resource, amount)| self.inventory[*resource] >= *amount);
+        if !has_all_ingredients {
+            return Err(format!("Recipe {} is missing ingredients", recipe_name));
+        }
+        let mut new_state = self.inventory.clone();
+        for (resource, amount) in recipe.ingredients.iter() {
+            new_state[*resource] -= *amount / recipe.ticks as f64;
+        }
+        for (resource, amount) in recipe.outputs.iter() {
+            new_state[*resource] += amount / recipe.ticks as f64;
+        }
+        self.inventory = new_state;
+
+        self.time += 1;
+        Ok(())
+    }
 }
