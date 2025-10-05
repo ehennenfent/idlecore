@@ -2,5 +2,16 @@
 name = "idlecore"
 version = "0.1.0"
 edition = "2024"
+repository = "https://github.com/ehennenfent/idlecore"
+
+[lib]
+name = "idlecore"
+path = "src/lib.rs"
+
+[[bin]]
+name = "idlecore-cli"
+path = "src/main.rs"
 
 [dependencies]
+serde = "1.0.228"
+toml = "0.9.7"
