@@ -1,7 +1,7 @@
 use std::{collections::HashMap, ops::Index};
 
 #[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
-pub struct Resource(pub(crate) usize);
+pub struct Resource(pub usize);
 
 #[derive(Debug, Clone)]
 pub struct ResourceMap {
@@ -47,6 +47,6 @@ impl ResourceMap {
     }
 
     pub fn has_resource(&self, resource: Resource) -> bool {
-        resource.0 > 0 && resource.0 < self.resource_names.len()
+        resource.0 < self.resource_names.len()
     }
 }

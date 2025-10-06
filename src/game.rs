@@ -2,6 +2,11 @@ use std::collections::HashMap;
 
 use crate::{Recipe, ResourceMap, StateVec};
 
+const EPSILON: f64 = 1e-10;
+fn float_ge(a: f64, b: f64) -> bool {
+    a >= b - EPSILON
+}
+
 pub struct Game {
     pub resources: ResourceMap,
     pub recipes: HashMap<String, Recipe>,
@@ -51,14 +56,14 @@ impl Game {
         let has_all_requires = recipe
             .requires
             .iter()
-            .all(|(resource, amount)| self.inventory[*resource] >= *amount);
+            .all(|(resource, amount)| float_ge(self.inventory[*resource], *amount));
         if !has_all_requires {
             return Err(format!("Recipe {} is missing prerequisites", recipe_name));
         }
         let has_all_ingredients = recipe
             .ingredients
             .iter()
-            .all(|(resource, amount)| self.inventory[*resource] >= *amount);
+            .all(|(resource, amount)| float_ge(self.inventory[*resource], *amount / recipe.ticks as f64));
         if !has_all_ingredients {
             return Err(format!("Recipe {} is missing ingredients", recipe_name));
         }
