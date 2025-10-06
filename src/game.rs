@@ -60,10 +60,9 @@ impl Game {
         if !has_all_requires {
             return Err(format!("Recipe {} is missing prerequisites", recipe_name));
         }
-        let has_all_ingredients = recipe
-            .ingredients
-            .iter()
-            .all(|(resource, amount)| float_ge(self.inventory[*resource], *amount / recipe.ticks as f64));
+        let has_all_ingredients = recipe.ingredients.iter().all(|(resource, amount)| {
+            float_ge(self.inventory[*resource], *amount / recipe.ticks as f64)
+        });
         if !has_all_ingredients {
             return Err(format!("Recipe {} is missing ingredients", recipe_name));
         }

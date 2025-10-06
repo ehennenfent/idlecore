@@ -1,7 +1,9 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 use crate::Resource;
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Recipe {
     // resources required to make the recipe, consumed by producing it
     pub ingredients: HashMap<Resource, f64>,

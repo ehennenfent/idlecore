@@ -1,9 +1,10 @@
+use serde::{Deserialize, Serialize};
 use std::{collections::HashMap, ops::Index};
 
-#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash)]
+#[derive(Debug, Copy, Clone, Ord, PartialOrd, Eq, PartialEq, Hash, Serialize, Deserialize)]
 pub struct Resource(pub usize);
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ResourceMap {
     pub resource_names: Vec<String>,
     pub resource_indices: HashMap<String, Resource>,

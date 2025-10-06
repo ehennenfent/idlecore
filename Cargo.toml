@@ -13,5 +13,5 @@ name = "idlecore-cli"
 path = "src/main.rs"
 
 [dependencies]
-serde = "1.0.228"
+serde = { version = "1.0.228", features = ["derive"] }
 toml = "0.9.7"
