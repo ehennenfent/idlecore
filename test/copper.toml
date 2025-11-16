@@ -1,0 +1,27 @@
+resources = [
+    "copper_ore",
+    "copper_bars",
+    "copper_pickaxes",
+]
+
+[recipes.mine_ore]
+name = "Mine copper ore"
+ingredients = {}
+outputs = { copper_ore = 1.0 }
+requires = {}
+ticks = 2
+
+[recipes.smelt_bars]
+name = "Smelt copper bars"
+ingredients = { copper_ore = 1.0 }
+outputs = { copper_bars = 1.0 }
+requires = {}
+ticks = 3
+
+[recipes.make_pickaxes]
+name = "Craft copper pickaxes"
+ingredients = { copper_bars = 2.0 }
+outputs = { copper_pickaxes = 1.0 }
+requires = {}
+ticks = 6
+

@@ -12,6 +12,10 @@ path = "src/lib.rs"
 name = "idlecore-cli"
 path = "src/main.rs"
 
+[[bin]]
+name = "copper-test"
+path = "test/copper.rs"
+
 [dependencies]
 serde = { version = "1.0.228", features = ["derive"] }
 toml = "0.9.7"
