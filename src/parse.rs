@@ -12,9 +12,9 @@ struct Config {
 #[derive(Debug, Deserialize)]
 struct RecipeConfig {
     name: String,
-    ingredients: HashMap<String, f64>,
-    outputs: HashMap<String, f64>,
-    requires: HashMap<String, f64>,
+    ingredients: HashMap<String, i64>,
+    outputs: HashMap<String, i64>,
+    requires: HashMap<String, i64>,
     ticks: i32,
 }
 
@@ -46,9 +46,9 @@ pub fn load_resources_and_recipes(
 }
 
 fn convert_resource_map(
-    string_map: &HashMap<String, f64>,
+    string_map: &HashMap<String, i64>,
     resource_map: &ResourceMap,
-) -> Result<HashMap<Resource, f64>, Box<dyn std::error::Error>> {
+) -> Result<HashMap<Resource, i64>, Box<dyn std::error::Error>> {
     let mut result = HashMap::new();
     for (resource_name, amount) in string_map {
         if !resource_map.has_resource_by_name(resource_name) {
